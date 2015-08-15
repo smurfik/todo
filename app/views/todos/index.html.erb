@@ -1,1 +1,14 @@
-<h1> To Do </h1>
+<%= form_for @todo do |f| %>
+  Description: <%= f.text_field :description %>
+  <%= f.submit %>
+<% end %>
+
+<% @todos.each do |todo| %>
+  <div><%= form_for todo do |f| %>
+    <%= f.check_box :status %>
+    <%= f.text_field :description %>
+    <%= f.submit %>
+    <%= link_to("X", todo_path(todo), method: :delete) %>
+  <% end %></div>
+<% end %>
+
