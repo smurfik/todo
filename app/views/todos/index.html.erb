@@ -12,3 +12,4 @@
   <% end %></div>
 <% end %>
 
+<%= pluralize(@todos.where(status: true).count,"item")%> left
