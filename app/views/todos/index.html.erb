@@ -1,15 +1,40 @@
-<%= form_for @todo do |f| %>
-  Description: <%= f.text_field :description %>
-  <%= f.submit %>
-<% end %>
+<div class="container"></br>
 
-<% @todos.each do |todo| %>
-  <div><%= form_for todo do |f| %>
-    <%= f.check_box :status %>
-    <%= f.text_field :description %>
-    <%= f.submit %>
-    <%= link_to("X", todo_path(todo), method: :delete) %>
-  <% end %></div>
-<% end %>
+  <%= form_for @todo do |f| %>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="input-group">
+          <%= f.text_field :description, placeholder: :description, class: "form-control" %>
+          <span class="input-group-btn">
+            <%= f.submit class: "btn btn-default" %>
+          </span>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
-<%= pluralize(@todos.where(status: true).count,"item")%> left
+  <div></br>
+    <% @todos.each do |todo| %>
+      <%= form_for todo do |f| %>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <%= f.check_box :status %>
+              </span>
+              <%= f.text_field :description, class: "form-control" %>
+                <span class="input-group-btn">
+                  <%= f.submit class: "btn btn-default" %>
+                </span>
+                <span class="input-group-btn">
+                  <%= link_to("X", todo_path(todo), method: :delete, class: "btn btn-danger form-control") %>
+                </span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div></br>
+
+  <div><%= pluralize(@todos.where(status: true).count,"item")%> left</div>
+</div>
