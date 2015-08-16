@@ -36,5 +36,5 @@
     <% end %>
   </div></br>
 
-  <div><%= pluralize(@todos.where(status: true).count,"item")%> left</div>
+  <div><%= pluralize(@todos.where(status: false).count,"item")%> left</div>
 </div>
