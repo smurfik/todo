@@ -6,9 +6,13 @@ class TodosController < ApplicationController
   end
 
   def create
+    @todos = Todo.all
     @todo = Todo.new(permitted_params)
-    @todo.save
-    redirect_to root_path 
+    if @todo.save
+      redirect_to root_path 
+    else
+      render :index
+    end
   end
 
   def permitted_params

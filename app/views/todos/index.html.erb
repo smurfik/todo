@@ -9,8 +9,14 @@
             <%= f.submit class: "btn btn-default" %>
           </span>
         </div>
+        <% if @todo.errors.messages[:description].present? %>
+          <div class="alert alert-danger" >
+            <%= @todo.errors.messages[:description].first.capitalize %> 
+          </div>
+        <% end %>
       </div>
     </div>
+
   <% end %>
 
   <div></br>
