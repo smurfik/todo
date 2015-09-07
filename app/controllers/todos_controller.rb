@@ -1,13 +1,15 @@
 class TodosController < ApplicationController
 
+  before_action :ensure_logged_in
+
   def index
     @todo = Todo.new
-    @todos = Todo.all
+    @todos = current_user.todos.all 
   end
 
   def create
-    @todos = Todo.all
-    @todo = Todo.new(permitted_params)
+    @todos = current_user.todos.all 
+    @todo = current_user.todos.new(permitted_params)
     if @todo.save
       redirect_to root_path 
     else
@@ -20,13 +22,13 @@ class TodosController < ApplicationController
   end
 
   def update
-    @todo = Todo.find(params[:id])
+    @todo = current_user.todos.find(params[:id])
     @todo.update_attributes(permitted_params)
     redirect_to root_path
   end
 
   def destroy
-    @todo = Todo.find(params[:id])
+    @todo = current_user.todos.find(params[:id])
     @todo.delete
     redirect_to root_path
   end
